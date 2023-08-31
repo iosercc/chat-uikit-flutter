@@ -84,6 +84,10 @@ class TIMUIKitProfileController {
     return model.updateSelfSignature(selfSignature);
   }
 
+  Future<V2TimCallback> updateSelfPat (String selfPat){
+    return model.updateSelfPat(selfPat);
+  }
+
   Future<V2TimCallback> updateNickName(String nickName) {
     return model.updateNickName(nickName);
   }

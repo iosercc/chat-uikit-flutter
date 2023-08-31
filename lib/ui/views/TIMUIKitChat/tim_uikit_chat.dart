@@ -67,6 +67,9 @@ class TIMUIKitChat extends StatefulWidget {
   final void Function(String userID, TapDownDetails tapDetails)?
       onSecondaryTapAvatar;
 
+  /// Avatar and name in message reaction double tap callback.
+  final void Function(V2TimMessage message)? onDoubleTapAvatar;
+
   @Deprecated(
       "Nickname will not shows in one-to-one chat, if you tend to control it in group chat, please use `isShowSelfNameInGroup` and `isShowOthersNameInGroup` from `config: TIMUIKitChatConfig` instead")
 
@@ -205,6 +208,7 @@ class TIMUIKitChat extends StatefulWidget {
       this.customAppBar,
       this.inputTopBuilder,
       this.onSecondaryTapAvatar,
+        this.onDoubleTapAvatar,
       this.customMessageHoverBarOnDesktop})
       : super(key: key) {
     startTime = DateTime.now().millisecondsSinceEpoch;
@@ -544,6 +548,7 @@ class _TUIChatState extends TIMUIKitState<TIMUIKitChat> {
                                     scrollController: autoController,
                                     onSecondaryTapAvatar:
                                         widget.onSecondaryTapAvatar,
+                                    onDoubleTapAvatar: widget.onDoubleTapAvatar,
                                     onTapAvatar: widget.onTapAvatar,
                                     // ignore: deprecated_member_use_from_same_package
                                     showNickName: widget.showNickName,

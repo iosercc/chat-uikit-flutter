@@ -138,8 +138,7 @@ class _GroupProfileGroupManagePageState
               Provider.of<TUIGroupProfileModel>(context).groupMemberList;
           final theme = Provider.of<TUIThemeViewModel>(context).theme;
           final isAllMuted = widget.model.groupInfo?.isAllMuted ?? false;
-          final bool isAllowMuteMember =
-              (widget.model.groupInfo?.groupType ?? "") != GroupType.Work;
+          const bool isAllowMuteMember = true;
           final isDesktopScreen =
               TUIKitScreenUtils.getFormFactor(context) == DeviceType.Desktop;
 

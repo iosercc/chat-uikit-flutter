@@ -53,7 +53,7 @@ class TUIProfileViewModel extends ChangeNotifier {
   }
 
   loadData({required String userID, bool isNeedConversation = true}) async {
-    if(userID.isEmpty){
+    if (userID.isEmpty) {
       return;
     }
     V2TimFriendInfo? friendUserInfo;
@@ -209,6 +209,16 @@ class TUIProfileViewModel extends ChangeNotifier {
     );
     if (res.code == 0) {
       _userProfile?.friendInfo!.userProfile!.selfSignature = selfSignature;
+      notifyListeners();
+    }
+    return res;
+  }
+
+  Future<V2TimCallback> updateSelfPat(String selfPat) async {
+    final res = await _coreServices.setSelfInfo(
+        userFullInfo: V2TimUserFullInfo(customInfo: {'selfPat': selfPat}));
+    if (res.code == 0) {
+      _userProfile?.friendInfo!.userProfile!.customInfo = {'selfPat': selfPat};
       notifyListeners();
     }
     return res;

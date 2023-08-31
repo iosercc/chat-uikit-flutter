@@ -203,6 +203,9 @@ class TIMUIKitHistoryMessageListItem extends StatefulWidget {
   final void Function(String userID, TapDownDetails tapDetails)?
       onSecondaryTapForOthersPortrait;
 
+  /// Avatar and name in message reaction double tap callback.
+  final void Function(V2TimMessage message)? onDoubleTapOthersPortrait;
+
   /// the function use for reply message, when click replied message can scroll to it.
   final Function? onScrollToIndex;
 
@@ -320,6 +323,7 @@ class TIMUIKitHistoryMessageListItem extends StatefulWidget {
       this.customEmojiStickerList = const [],
       this.textFieldController,
       this.onSecondaryTapForOthersPortrait,
+      this.onDoubleTapOthersPortrait,
       this.groupMemberInfo,
       this.customMessageHoverBarOnDesktop})
       : super(key: key);
@@ -1364,6 +1368,13 @@ class _TIMUIKItHistoryMessageListItemState
                                   }
                                 }
                               : null,
+                          onDoubleTap: () {
+                            if (widget.onDoubleTapOthersPortrait != null &&
+                                widget.allowAvatarTap) {
+                              widget.onDoubleTapOthersPortrait!(
+                                  message);
+                            }
+                          },
                           onTap: isDesktopScreen
                               ? null
                               : () {

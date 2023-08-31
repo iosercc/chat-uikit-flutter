@@ -59,6 +59,9 @@ class TIMUIKitHistoryMessageListContainer extends StatefulWidget {
   final void Function(String userID, TapDownDetails tapDetails)?
       onSecondaryTapAvatar;
 
+  /// Avatar and name in message reaction double tap callback.
+  final void Function(V2TimMessage message)? onDoubleTapAvatar;
+
   @Deprecated(
       "Nickname will not show in one-to-one chat, if you tend to control it in group chat, please use `isShowSelfNameInGroup` and `isShowOthersNameInGroup` from `config: TIMUIKitChatConfig` instead")
   final bool showNickName;
@@ -110,6 +113,7 @@ class TIMUIKitHistoryMessageListContainer extends StatefulWidget {
     this.textFieldController,
     required this.conversation,
     this.onSecondaryTapAvatar,
+    this.onDoubleTapAvatar,
     this.groupMemberInfo,
     this.customMessageHoverBarOnDesktop,
   }) : super(key: key);
@@ -191,6 +195,7 @@ class _TIMUIKitHistoryMessageListContainerState
                 message: message!,
                 showAvatar: chatConfig.isShowAvatar,
                 onSecondaryTapForOthersPortrait: widget.onSecondaryTapAvatar,
+                onDoubleTapOthersPortrait: widget.onDoubleTapAvatar,
                 onTapForOthersPortrait: widget.onTapAvatar,
                 messageItemBuilder: widget.messageItemBuilder,
                 onLongPressForOthersHeadPortrait:
