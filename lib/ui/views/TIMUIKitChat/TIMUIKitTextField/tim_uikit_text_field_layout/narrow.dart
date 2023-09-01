@@ -79,6 +79,7 @@ class TIMUIKitTextFieldLayoutNarrow extends StatefulWidget {
   /// on text changed
   final void Function(String)? onChanged;
 
+  final void Function()? addCustomEmoji;
   final V2TimMessage? repliedMessage;
 
   /// show send emoji icon
@@ -127,7 +128,9 @@ class TIMUIKitTextFieldLayoutNarrow extends StatefulWidget {
       this.hintText,
       required this.customEmojiStickerList,
       this.controller,
-      required this.stickerPackageList})
+      required this.stickerPackageList,
+        this.addCustomEmoji
+      })
       : super(key: key);
 
   @override
@@ -250,6 +253,7 @@ class _TIMUIKitTextFieldLayoutNarrowState
                 widget.addStickerToText(newText);
                 setSendButton();
               }),
+              addCustomEmoji: widget.addCustomEmoji,
               customStickerPackageList: widget.stickerPackageList,
               lightPrimaryColor: theme.lightPrimaryColor);
     }

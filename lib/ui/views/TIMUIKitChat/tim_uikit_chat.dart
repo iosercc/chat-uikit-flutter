@@ -161,14 +161,15 @@ class TIMUIKitChat extends StatefulWidget {
 
   /// Custom text field
   final Widget Function(BuildContext context)? textFieldBuilder;
-
+  
+  final Function()? addCustomEmoji;
   /// An optional parameter `groupMemberList` can be provided.
   /// `groupMemberList` accepts a list of nullable `V2TimGroupMemberFullInfo` objects.
   /// The purpose of this parameter is to allow the client to supply a pre-fetched list
   /// of group member information. If this list is provided, it will not make
   /// additional network requests to fetch the group member information internally.
   List<V2TimGroupMemberFullInfo?>? groupMemberList;
-
+  final List<CustomStickerPackage> stickerPackageList;
   TIMUIKitChat(
       {Key? key,
       this.groupID,
@@ -205,11 +206,14 @@ class TIMUIKitChat extends StatefulWidget {
       this.topFixWidget = const SizedBox(),
       this.textFieldBuilder,
       this.customEmojiStickerList = const [],
+        this.stickerPackageList = const [],
       this.customAppBar,
       this.inputTopBuilder,
       this.onSecondaryTapAvatar,
         this.onDoubleTapAvatar,
-      this.customMessageHoverBarOnDesktop})
+      this.customMessageHoverBarOnDesktop,
+        this.addCustomEmoji
+      })
       : super(key: key) {
     startTime = DateTime.now().millisecondsSinceEpoch;
   }
@@ -568,6 +572,7 @@ class _TUIChatState extends TIMUIKitState<TIMUIKitChat> {
                                   : (widget.textFieldBuilder != null
                                       ? widget.textFieldBuilder!(context)
                                       : TIMUIKitInputTextField(
+                                          stickerPackageList: widget.stickerPackageList,
                                           chatConfig: widget.config,
                                           groupID: widget.groupID,
                                           atMemberPanelScroll:
@@ -611,6 +616,7 @@ class _TUIChatState extends TIMUIKitState<TIMUIKitChat> {
                                           showSendEmoji: widget
                                                   .config?.isAllowEmojiPanel ??
                                               true,
+                                addCustomEmoji: widget.addCustomEmoji,
                                         ));
                             },
                             selector: (c, model) {

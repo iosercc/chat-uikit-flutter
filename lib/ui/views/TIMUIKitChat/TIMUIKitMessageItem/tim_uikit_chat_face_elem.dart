@@ -49,6 +49,7 @@ class _TIMUIKitTextElemState extends TIMUIKitState<TIMUIKitFaceElem> {
   @override
   Widget tuiBuild(BuildContext context, TUIKitBuildValue value) {
     final isDesktopScreen = TUIKitScreenUtils.getFormFactor(context) == DeviceType.Desktop;
+    //assets/custom_face_resource/4350/
     return TIMUIKitMessageReactionWrapper(
       chatModel: widget.model,
         isShowJump: widget.isShowJump,
@@ -61,8 +62,8 @@ class _TIMUIKitTextElemState extends TIMUIKitState<TIMUIKitFaceElem> {
           constraints:
               BoxConstraints(maxWidth: MediaQuery.of(context).size.width * (isDesktopScreen ? 0.1 : 0.3)),
           child: isFromNetwork()
-              ? Image.network(widget.path)
-              : Image.asset(createPathFromNative(widget.path)),
+              ? Image.network(widget.path + '?t=${widget.message.random}')
+              : Image.asset(widget.path),
         ));
   }
 }
